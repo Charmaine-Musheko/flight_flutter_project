@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flight_reminder/database/repositories/state/state_repository.dart';
 import 'package:flight_reminder/locator.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +25,15 @@ void main() async {
     StateRepository repo = locator<StateRepository>();
     return await repo.getInitialRoute();
   }
-
+ HttpOverrides.global = MyHttpOverrides();
   runApp(FlightReminderApp(
     initialRoute: await initialRoute(),
   ));
+}
+ class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
 }

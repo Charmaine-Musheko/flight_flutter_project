@@ -1,6 +1,7 @@
 import 'package:flight_reminder/database/model/entities/user.dart';
 import 'package:flight_reminder/database/repositories/state/state_repository.dart';
 import 'package:flight_reminder/locator.dart';
+import 'package:flight_reminder/screens/flights/flight_form.dart';
 import 'package:flight_reminder/screens/flights/flight_view_model.dart';
 import 'package:flight_reminder/services/dtos/flight_dto.dart';
 import 'package:flight_reminder/theme_constants/colours.dart';
@@ -36,7 +37,7 @@ class _FlightScreenState extends State<FlightScreen>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     if (!viewModel.isFutureLoading) {
-      _user = viewModel.getUser();
+     // _user = viewModel.getUser();
       _requests = viewModel.get();
     }
   }
@@ -65,66 +66,43 @@ class _FlightScreenState extends State<FlightScreen>
       child: Consumer<FlightViewModel>(
         builder: (context, value, child) => Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            title: Text(
-              'Flights',
-              style: TextStyle(
-                fontSize: 16,
-                fontFamily: "Quicksand",
-                fontWeight: FontWeight.w300,
-                letterSpacing: 2.0,
-              ),
-            ),
+        backgroundColor: Colors.brown,
+        title: Text(
+          'Flights',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.w400,
+            letterSpacing: 2.0,
           ),
+        ),
+        actions: [
+          // Add an IconButton in the AppBar
+          IconButton(
+            icon: Icon(Icons.add), // Add icon
+            onPressed: () {
+              // Navigate to the FlightFormScreen when the icon is pressed
+              Navigator.pushNamed(context, FlightFormScreen.routeName);
+            },
+          ),
+        ],
+      ),
           body: Stack(
             children: [
-              Image.asset(
-                'assets/giraffe_background.png', // Replace with your image path
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              ),
+              // Image.asset(
+              //   'assets/giraffe_background.png', // Replace with your image path
+              //   fit: BoxFit.cover,
+              //   width: double.infinity,
+              //   height: double.infinity,
+              // ),
               SingleChildScrollView(
                 child: Container(
                   height: MediaQuery.of(context).size.height, // Provide a fixed height
                   child: Column(
                     children: [
-                      // Row with Popular, Trending, and Recent buttons
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      //   children: [
-                      //     TextButton(
-                      //       onPressed: () {
-                      //         // Handle Popular button press
-                      //       },
-                      //       child: Text(
-                      //         'Popular',
-                      //         style: kArticleContent,
-                      //       ),
-                      //     ),
-                      //     TextButton(
-                      //       onPressed: () {
-                      //         // Handle Trending button press
-                      //       },
-                      //       child: Text(
-                      //         'Trending',
-                      //         style: kArticleContent,
-                      //       ),
-                      //     ),
-                      //     TextButton(
-                      //       onPressed: () {
-                      //         // Handle Recent button press
-                      //       },
-                      //       child: Text(
-                      //         'Recent',
-                      //         style: kArticleContent,
-                      //      ),
-                       //    ),
-                    //    ],
-                     // ),
-                      // Horizontal list of ArticleCell widgets
+                  
                       Container(
-                        height: 200, // Adjust the height as needed
+                        //height: 200, // Adjust the height as needed
                         child: FutureBuilder(
                           future: _requests,
                           builder: (context, snapshot) {
@@ -147,7 +125,7 @@ class _FlightScreenState extends State<FlightScreen>
                                       // Replace with your article data
                                       return Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: FlightCell(airportName: request!.airportName, departureLocation: request.departureLocation, destination: request.destination, departureTime: request.departureTime, arrivalTime: request.arrivalTime, flightDate: request.flightDate, departureDate: request.departureDate, arrivalDate: request.arrivalDate, ticketNumber: request.ticketNumber,
+                                        child: FlightCell(airportName: request!.airportName, departureLocation: request.departureLocation, destination: request.destination, departureTime: request.departureTime, arrivalTime: request.arrivalTime, flightDate: request.flightDate, departureDate: request.departureDate, arrivalDate: request.arrivalDate, ticketNumber: request.ticketNumber, flightId: request.flightId,
                                          
                                         ),
                                       );

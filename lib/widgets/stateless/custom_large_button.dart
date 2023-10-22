@@ -27,14 +27,14 @@ class CustomLargeButton extends StatelessWidget {
       width: 300,
       child: Material(
         elevation: hasShadow ? 8.0 : 0.0,
-        shadowColor: kAccent,
+        shadowColor: Colors.brown,
         borderRadius: BorderRadius.circular(2),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(2),
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: kAccent, // Border color
+                color: Colors.brown, // Border color
                 width: 1.0, // Border width
               ),
               borderRadius: BorderRadius.circular(2),

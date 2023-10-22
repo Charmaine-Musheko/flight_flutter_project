@@ -49,8 +49,13 @@ class GetStartedScreen extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
+                  const SizedBox(
+                    width: 300,
+                    child: Icon(Icons.flight_land,
+                    size: 150,)
+                  ),
                   const Spacer(
-                    flex: 2,
+                    flex: 1,
                   ),
                 ]),
               ),

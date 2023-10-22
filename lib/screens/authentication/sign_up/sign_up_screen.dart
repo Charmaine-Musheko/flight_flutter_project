@@ -188,8 +188,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
             id, firstName, lastName, address, email, password);
         viewModel.setDidLogin();
           if (mounted) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, FlightScreen.routeName, (route) => false, arguments: InitialArguments(index: 0));
+          Navigator.pushReplacementNamed(context, FlightScreen.routeName);
+
           }
       }
     } else {

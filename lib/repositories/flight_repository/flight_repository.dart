@@ -102,7 +102,7 @@ Future<List<FlightDto?>> getByIdFromServer(int id ) async {
 }
 //Post to the server
 Future<List<FlightDto?>> postFlight(String airportName,String departureLocation, String destination , String departureTime, String arrivalTime, String flightDate, String departureDate,String arrivalDate, String ticketNumber) async {
- FlightResult result = await _client.addFlights(url: AppUrl.addFlight, airportName: airportName, departureLocation: departureDate, destination: destination, departureTime: departureTime, arrivalTime: arrivalTime, flightDate: flightDate, departureDate: departureDate, arrivalDate: arrivalDate, ticketNumber: ticketNumber);
+ FlightResult result = await _client.addFlights(url: AppUrl.addFlight, airportName: airportName, departureLocation: departureLocation, destination: destination, departureTime: departureTime, arrivalTime: arrivalTime, flightDate: flightDate, departureDate: departureDate, arrivalDate: arrivalDate, ticketNumber: ticketNumber);
 
   if (result.status == FlightStatus.success) {
     // Check if result.result is a List of JSON objects

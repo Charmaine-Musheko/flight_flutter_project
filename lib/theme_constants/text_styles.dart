@@ -26,22 +26,22 @@ const kTabSelected = TextStyle(
 //Tab Bar
 const kGetStartedHeader = TextStyle(
     fontSize: 30.0,
-    fontWeight: FontWeight.w300,
-    fontFamily: 'Al Bayan',
-    color: kDarkTextColor);
+    fontWeight: FontWeight.w400,
+    fontFamily: 'NunutoSans',
+    color: Colors.brown);
 
     const kGetStartedHeaderSmall = TextStyle(
     fontSize: 20.0,
-    fontWeight: FontWeight.w200,
-    fontFamily: 'Al Bayan',
-    color: kDarkTextColor);
+    fontWeight: FontWeight.w300,
+    fontFamily: 'NunitoSans',
+    color: Colors.brown);
 
 //Buttons
 const kLargeCustomButton = TextStyle(
     fontFamily: 'NunitoSans',
     fontWeight: FontWeight.w700,
     fontSize: 18.0,
-    color: kAccent);
+    color: Colors.brown);
 
 const kEmptyCustomButton = TextStyle(
     fontFamily: 'NunitoSans',

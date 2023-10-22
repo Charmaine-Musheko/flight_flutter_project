@@ -54,7 +54,7 @@ class _SignInScreenState extends State<SignInScreen> {
           body: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/flutter_logo.png'),
+                image: AssetImage('assets/images/orange_plane.png'),
                 fit: BoxFit.cover,
               ),
             ),

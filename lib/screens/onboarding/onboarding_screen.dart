@@ -1,5 +1,6 @@
 
 import 'package:flight_reminder/screens/authentication/sign_in/sign_in_screen.dart';
+import 'package:flight_reminder/screens/flights/flight_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -140,7 +141,7 @@ class _OnBoardingState extends State<OnBoarding> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignInScreen()));
+                                    builder: (context) => FlightScreen()));
                           },
                           child: Text('skip')),
                     ),
@@ -153,17 +154,21 @@ class _OnBoardingState extends State<OnBoarding> {
                   child: PageView(
                     controller: pageController,
                     children: [
-            //           Center(
-            //            child: SvgPicture.asset('assets/onboarding_assets/guyTrading.svg'),
-            //           ),
-            //           Center(
-            //            child: Lottie.asset(
-            // 'assets/onboarding_assets/family.json'),
-            //           ),
-            //           Center(
-            //            child: Lottie.asset(
-            // 'assets/onboarding_assets/girl_watch.json'),
-            //           ),
+            Icon(
+        Icons.flight_takeoff, // Use the flight_takeoff icon
+        size: 150, // Set the size of the icon
+        color: Colors.brown, // Set the color of the icon
+      ),
+      Icon(
+        Icons.flight_land, // Use the flight_land icon
+        size: 150, // Set the size of the icon
+        color: Colors.brown, // Set the color of the icon
+      ),
+      Icon(
+        Icons.airplanemode_active, // Use the airplanemode_active icon
+        size: 150, // Set the size of the icon
+        color: Colors.brown, // Set the color of the icon
+      ),
                     ],
                   ),
                 ),
@@ -177,21 +182,21 @@ class _OnBoardingState extends State<OnBoarding> {
                     controller: textController,
                     children: const [
                       Text(
-                        'Manage \nEasy',
+                        'Reminder \nEasy',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
                         ),
                       ),
                       Text(
-                        'Transact \nEasy',
+                        'Time \nEasy',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
                         ),
                       ),
                       Text(
-                        'Create \nEasy',
+                        'Flights \nEasy',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
@@ -210,13 +215,13 @@ class _OnBoardingState extends State<OnBoarding> {
                     controller: descriptionController,
                     children: const [
                       Text(
-                        'Manage financeManage financeManage finance',
+                        'Catch your flight on time',
                       ),
                       Text(
-                        'Manage financeManage financeManage finance',
+                        'Catch each flight',
                       ),
                       Text(
-                        'Manage financeManage financeManage finance',
+                        'On time All the time',
                       ),
                     ],
                   ),

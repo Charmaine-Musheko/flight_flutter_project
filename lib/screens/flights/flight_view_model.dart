@@ -1,7 +1,4 @@
-
 import 'package:flight_reminder/base/base_view_model.dart';
-import 'package:flight_reminder/database/model/entities/user.dart';
-import 'package:flight_reminder/database/repositories/user_repository/user_repository.dart';
 import 'package:flight_reminder/locator.dart';
 import 'package:flight_reminder/repositories/flight_repository/flight_repository.dart';
 import 'package:flight_reminder/repositories/flight_repository/flight_result.dart';
@@ -10,13 +7,23 @@ import 'package:flight_reminder/services/dtos/flight_dto.dart';
 class FlightViewModel extends BaseViewModel {
 
   final FlightRepository _repo = locator<FlightRepository>();
-  final UserRepository _userRepository = locator<UserRepository>();
+ // final UserRepository _userRepository = locator<UserRepository>();
 
-  Future<List<FlightDto?>> get() async {
+ Future<List<FlightDto?>> get() async {
 
     viewIsLoading(true);
 
     List<FlightDto?> result = await _repo.getFromServer();
+
+    viewIsLoading(false);
+
+    return result;
+  } 
+  Future<List<FlightDto?>> deleteFlight(int id) async {
+
+    viewIsLoading(true);
+
+    List<FlightDto?> result = await _repo.deleteFlightFromServer(id);
 
     viewIsLoading(false);
 
@@ -70,7 +77,7 @@ Future<FlightResult> saveFlight(
 
 
 
- Future<User?> getUser() async {
-    return await _userRepository.getUser();
-  }
+//  Future<User?> getUser() async {
+//     return await _userRepository.getUser();
+//   }
 }

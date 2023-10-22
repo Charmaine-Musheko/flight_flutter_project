@@ -4,6 +4,7 @@ import 'package:flight_reminder/database/data_repositories/user_data_repository.
 import 'package:flight_reminder/database/database_provider.dart';
 import 'package:flight_reminder/database/repositories/state/state_repository.dart';
 import 'package:flight_reminder/database/repositories/user_repository/user_repository.dart';
+import 'package:flight_reminder/repositories/flight_repository/flight_repository.dart';
 import 'package:flight_reminder/screens/authentication/sign_in/sign_in_viewmodel.dart';
 import 'package:flight_reminder/screens/authentication/sign_up/sign_up_view_model.dart';
 import 'package:flight_reminder/screens/flights/flight_view_model.dart';
@@ -52,7 +53,7 @@ void setup() {
       userRepository: locator<UserRepository>(),
       databaseProvider: locator<DatabaseProvider>()));
 
-
+locator.registerLazySingleton(() => FlightRepository());
         //Data repositories
   locator.registerLazySingleton(
       () => UserDataRepository(dbProvider: locator<DatabaseProvider>()));

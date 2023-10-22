@@ -22,12 +22,11 @@ class HttpClient implements IHttpClient {
     if (await hasInternetConnection()) {
       try {
         var response = await _client
-            .patch(Uri.parse(url),
+            .post(Uri.parse(url),
                 headers: <String, String>{
                      'accept': '*/*', // Accept any content type
-                    // 'Content-Type': 'application/json; charset=UTF-8',
-                  
-                  //'ApiKey': '23xygTHtysafvv2!quyHAe78K',
+                    'Content-Type': 'application/json; charset=UTF-8',
+                
                 },
                 body: convert.jsonEncode(
                     <String, String>{'email': email, 'password': password}))
@@ -72,8 +71,8 @@ class HttpClient implements IHttpClient {
                   //'ApiKey': '23xygTHtysafvv2!quyHAe78K',
                 },
                 body: convert.jsonEncode(<String, String>{
-                  'firstName': firstName,
-                  'lastName': lastName,
+                  'first_name': firstName,
+                  'last_name': lastName,
                   'email': email,
                   'address': address,
                   'password': password,

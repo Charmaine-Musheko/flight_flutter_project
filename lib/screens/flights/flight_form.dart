@@ -1,5 +1,9 @@
+import 'package:flight_reminder/locator.dart';
+import 'package:flight_reminder/repositories/flight_repository/flight_result.dart';
+import 'package:flight_reminder/screens/flights/flight_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class FlightFormScreen extends StatefulWidget {
    static String routeName = 'flightFormScreen';
@@ -19,13 +23,24 @@ class _FlightFormScreenState extends State<FlightFormScreen> {
   final _departureDateController = TextEditingController();
   final _arrivalDateController = TextEditingController();
   final _ticketNumberController = TextEditingController();
+  final FlightViewModel viewModel = locator<FlightViewModel>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return ChangeNotifierProvider(
+      create: (context) => viewModel,
+      child: Consumer<FlightViewModel>(
+        builder: (context, value, child) => Scaffold(
       appBar: AppBar(
-        title: Text('Flight Details'),
-      ),
+  backgroundColor: Colors.brown, // Set the background color to brown
+  title: Text(
+    'Flight Form',
+    style: TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.w400 // Set the text color to white
+    ),
+  ),
+),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -175,15 +190,45 @@ class _FlightFormScreenState extends State<FlightFormScreen> {
                 ),
                 SizedBox(height: 16.0),
                 Center(
-                  child: ElevatedButton(
-  child: Text('Save'),
-  onPressed: () {
-    if (_formKey.currentState!.validate()) {
-      // Save flight details
-      
-    }
-  },
-),
+                  child: Container(
+                    width: double.infinity,
+                   
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+      primary: Colors.brown, // You can use Colors.beige if it's defined in your theme
+    ),
+                    child: Text('Save'),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        viewModel.saveFlight(
+                          _airportNameController.text,
+                          _departureLocationController.text,
+                          _destinationController.text,
+                          _departureTimeController.text,
+                          _arrivalTimeController.text,
+                          _flightDateController.text,
+                          _departureDateController.text,
+                          _arrivalDateController.text,
+                          _ticketNumberController.text,
+                        ).then((result) {
+                          if (result.status == FlightStatus.success) {
+                            // Navigate to a success screen or go back to the previous screen.
+                            Navigator.of(context).pop();
+                          } else {
+                            // Display an error message.
+                            final snackBar = SnackBar(
+                              content: Text('Error: Unable to save flight details'),
+                              duration: Duration(seconds: 2),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                          }
+                        });
+                      }
+                    },
+                  ),
+                  ),
+
+
                   
                 ),
               ],
@@ -191,6 +236,8 @@ class _FlightFormScreenState extends State<FlightFormScreen> {
           ),
         ),
       ),
+        )
+      )
     );
   }
 }
