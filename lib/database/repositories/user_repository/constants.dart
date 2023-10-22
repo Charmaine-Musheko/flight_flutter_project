@@ -1,0 +1,1 @@
+const kToken = 'FIREBASE_TOKEN';

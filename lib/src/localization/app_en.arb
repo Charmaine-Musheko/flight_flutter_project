@@ -1,0 +1,6 @@
+{
+  "appTitle": "flight_reminder",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
