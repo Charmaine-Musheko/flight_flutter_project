@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 
-
 class FlightScreen extends StatefulWidget {
   static String routeName = 'flightScreen';
   const FlightScreen({Key? key}) : super(key: key);
@@ -21,8 +20,7 @@ class FlightScreen extends StatefulWidget {
   _FlightScreenState createState() => _FlightScreenState();
 }
 
-class _FlightScreenState extends State<FlightScreen>
-    with WidgetsBindingObserver {
+class _FlightScreenState extends State<FlightScreen> with WidgetsBindingObserver {
   final FlightViewModel viewModel = locator<FlightViewModel>();
   final ScrollController _scrollController = ScrollController();
   late Future<User?> _user;
@@ -30,14 +28,13 @@ class _FlightScreenState extends State<FlightScreen>
   final StateRepository _stateRepository = locator<StateRepository>();
   final int maxSentences = 1; // Adjust this to the desired number of sentences
   Set<int> likedArticles = Set<int>();
-  
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     if (!viewModel.isFutureLoading) {
-     // _user = viewModel.getUser();
+      // _user = viewModel.getUser();
       _requests = viewModel.get();
     }
   }
@@ -58,7 +55,6 @@ class _FlightScreenState extends State<FlightScreen>
     WidgetsBinding.instance.removeObserver(this);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
@@ -66,67 +62,64 @@ class _FlightScreenState extends State<FlightScreen>
       child: Consumer<FlightViewModel>(
         builder: (context, value, child) => Scaffold(
           appBar: AppBar(
-        backgroundColor: Colors.brown,
-        title: Text(
-          'Flights',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w400,
-            letterSpacing: 2.0,
+            backgroundColor: Colors.brown,
+            title: Text(
+              'Flights',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w400,
+                letterSpacing: 2.0,
+              ),
+            ),
+            actions: [
+              // Add an IconButton in the AppBar
+              IconButton(
+                icon: Icon(Icons.add), // Add icon
+                onPressed: () {
+                  // Navigate to the FlightFormScreen when the icon is pressed
+                  Navigator.pushNamed(context, FlightFormScreen.routeName);
+                },
+              ),
+            ],
           ),
-        ),
-        actions: [
-          // Add an IconButton in the AppBar
-          IconButton(
-            icon: Icon(Icons.add), // Add icon
-            onPressed: () {
-              // Navigate to the FlightFormScreen when the icon is pressed
-              Navigator.pushNamed(context, FlightFormScreen.routeName);
-            },
-          ),
-        ],
-      ),
           body: Stack(
             children: [
-              // Image.asset(
-              //   'assets/giraffe_background.png', // Replace with your image path
-              //   fit: BoxFit.cover,
-              //   width: double.infinity,
-              //   height: double.infinity,
-              // ),
               SingleChildScrollView(
                 child: Container(
                   height: MediaQuery.of(context).size.height, // Provide a fixed height
                   child: Column(
                     children: [
-                  
                       Container(
-                        //height: 200, // Adjust the height as needed
                         child: FutureBuilder(
                           future: _requests,
                           builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.done) {
+                            if (snapshot.connectionState == ConnectionState.done) {
                               if (snapshot.hasData) {
-                                List<FlightDto?> requests =
-                                    snapshot.data as List<FlightDto?>;
+                                List<FlightDto?> requests = snapshot.data as List<FlightDto?>;
                                 if (requests.isNotEmpty) {
                                   return ListView.builder(
                                     controller: _scrollController,
                                     scrollDirection: Axis.vertical,
                                     shrinkWrap: true,
-                                    itemCount:
-                                        requests.length, // Replace with your actual number of articles
+                                    itemCount: requests.length, // Replace with your actual number of articles
                                     itemBuilder: (context, index) {
-                                      final FlightDto? request =
-                                          requests[index];
-                                   
+                                      final FlightDto? request = requests[index];
                                       // Replace with your article data
                                       return Padding(
                                         padding: const EdgeInsets.all(8.0),
-                                        child: FlightCell(airportName: request!.airportName, departureLocation: request.departureLocation, destination: request.destination, departureTime: request.departureTime, arrivalTime: request.arrivalTime, flightDate: request.flightDate, departureDate: request.departureDate, arrivalDate: request.arrivalDate, ticketNumber: request.ticketNumber, flightId: request.flightId,
-                                         
+                                        child: FlightCell(
+                                          airportName: request!.airportName,
+                                          departureLocation: request.departureLocation,
+                                          destination: request.destination,
+                                          departureTime: request.departureTime,
+                                          arrivalTime: request.arrivalTime,
+                                          flightDate: request.flightDate,
+                                          departureDate: request.departureDate,
+                                          arrivalDate: request.arrivalDate,
+                                          ticketNumber: request.ticketNumber,
+                                          flightId: request.flightId,
+                                          
                                         ),
                                       );
                                     },
@@ -144,20 +137,19 @@ class _FlightScreenState extends State<FlightScreen>
                                         ),
                                       ),
                                     ),
-                                  );
+                                    );
                                 }
                               } else {
                                 return const SizedBox();
                               }
                             } else {
-                              return const LoadingView(
-                                  show: true, isWhiteBg: true);
+                              return const LoadingView(show: true, isWhiteBg: true);
                             }
                           },
                         ),
                       ),
-                   ],
-                   ),
+                    ],
+                  ),
                 ),
               ),
             ],

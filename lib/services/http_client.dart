@@ -324,8 +324,8 @@ Future<FlightResult> addFlights({required String airportName, // Replace with ai
   @override
   Future<FlightResult> deleteFlight({required int id, required String url}) async {
   try {
-    final response = await http.patch(
-      Uri.parse(url +'?id=$id'),
+    final response = await http.delete(
+      Uri.parse(url +'/$id'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         // 'Authorization': 'Bearer $token',

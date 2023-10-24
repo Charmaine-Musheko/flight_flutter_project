@@ -55,7 +55,7 @@ class _FlightCellState extends State<FlightCell> {
         _duration = _duration - Duration(seconds: 1);
           }
       });
-      if (_duration.inMinutes == 15) {
+      if (_duration.inMinutes <= 15) {
           // Show a dialog
           showDialog(
             context: context,
@@ -102,7 +102,7 @@ class _FlightCellState extends State<FlightCell> {
                 flightDate: widget.flightDate,
                 departureDate: widget.departureDate,
                 arrivalDate: widget.arrivalDate,
-                ticketNumber: widget.ticketNumber, onDelete: () { viewModel.deleteFlight(widget.flightId);  },
+                ticketNumber: widget.ticketNumber, onDelete: () async { await viewModel.deleteFlight(widget.flightId);  Navigator.of(context).pop(); },
               ),
             ),
           );
